@@ -55,25 +55,24 @@ public class Register extends AppCompatActivity {
                 .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Toast.makeText(Register.this, "Account Created Successfully" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                         //progressBar.setVisibility(View.GONE);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(Register.this, "Registration failed." + task.getException(),
+                            Toast.makeText(Register.this, "Registration failed. \nEmail already exist",
                                     Toast.LENGTH_SHORT).show();
-
                         }
-                        // law registration nege7
+                        // registration succ
                         else {
+                            Toast.makeText(Register.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                             // heta di ashn a3ml add li info el users fl database 3ndi
                                 Users user = new Users(name, email, phone);
-                                FirebaseDatabase.getInstance().getReference("Drs")
+                                FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
 
 
-                            Intent intent = new Intent(Register.this, MainActivity.class);
+                            Intent intent = new Intent(Register.this, Login.class);
                             startActivity(intent);
                             finish();
                         }
