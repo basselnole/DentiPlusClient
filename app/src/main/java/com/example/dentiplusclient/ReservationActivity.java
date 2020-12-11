@@ -37,6 +37,8 @@ public class ReservationActivity extends AppCompatActivity {
     private String name,phone,stN,st,floor,apart,address,cause;
     private EditText editTextname,editTextphone,editTextstN,editTextSt,editTextFloorN,editTextApartn,editTextCause;
 
+    private String request_key="request_key";
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     DatabaseReference myRef = database.getReference("Requests").push();
@@ -55,9 +57,12 @@ public class ReservationActivity extends AppCompatActivity {
         reservation_details.setStatus("2");
 
         myRef.setValue(reservation_details);
-
+        //get the push key value
+        String key = myRef.getKey();
 
         Intent intent = new Intent(ReservationActivity.this, WaitResponse.class);
+        intent.putExtra(request_key,key);
+
         startActivity(intent);
     }
 
