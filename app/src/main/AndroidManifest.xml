@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WaitResponse"></activity>
+        <activity android:name=".MyAppointactivity">
+
+        </activity>
+        <activity android:name=".WaitResponse" />
         <activity android:name=".ReservationActivity" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />

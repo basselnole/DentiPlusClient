@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyAppointactivity">
+
+    <ImageView
+        android:id="@+id/imageViewlogoappoin"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="50dp"
+
+        android:background="@drawable/logo_denti"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/logo_denti" />
+
+    <TextView
+        android:id="@+id/textViewname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        app:layout_constraintTop_toBottomOf="@id/imageViewlogoappoin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        app:layout_constraintTop_toBottomOf="@+id/textViewname"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        app:layout_constraintTop_toBottomOf="@+id/textViewphone"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewcause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        app:layout_constraintTop_toBottomOf="@+id/textViewaddress"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        app:layout_constraintTop_toBottomOf="@+id/textViewcause"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        app:layout_constraintTop_toBottomOf="@+id/textViewcause"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/textViewdate"
+        android:layout_marginLeft="30dp"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewdatecount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date count: "
+        app:layout_constraintTop_toBottomOf="@+id/textViewdate"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

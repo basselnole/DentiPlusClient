@@ -6,4 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".WaitResponse">
 
+    <ImageView
+        android:id="@+id/imageViewlogowait"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="50dp"
+
+        android:background="@drawable/logo_denti"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/logo_denti" />
+
+    <TextView
+        android:id="@+id/textViewconfirmation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Waiting for Appointment confirmation"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:textColor="@color/black"
+       />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

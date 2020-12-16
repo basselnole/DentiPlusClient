@@ -33,6 +33,7 @@ public class Register extends AppCompatActivity {
         String password = inputPassword.getText().toString().trim();
         final  String name=  username.getText().toString().trim();
         final String phone= userphone.getText().toString().trim();
+        final String request ="nothing";
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -67,7 +68,7 @@ public class Register extends AppCompatActivity {
                         else {
                             Toast.makeText(Register.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                             // heta di ashn a3ml add li info el users fl database 3ndi
-                                Users user = new Users(name, email, phone);
+                                Users user = new Users(name, email, phone,request);
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
 
