@@ -31,7 +31,8 @@ public class MyAppointactivity extends AppCompatActivity {
     private String key;
 
     private String name,phone,address,cause,date,time;
-    private TextView textViewname,textViewphone,textViewaddress,textViewcause,textViewdate,textViewtime,textViewdatecount;
+    private TextView textViewname,textViewphone,textViewaddress,textViewcause,textViewdate,textViewtime;
+    private TextView textViewday,textViewhour,textViewmin,textViewsec;
     //firebase setup
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Requests");
@@ -93,7 +94,10 @@ public class MyAppointactivity extends AppCompatActivity {
 
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
 
-                textViewdatecount.setText("Days: " + days + "\nhours: " + hours + "\nminutes: " + minutes + "\nseconds: " + seconds); //You can compute the millisUntilFinished on hours/minutes/seconds
+                textViewday.setText("" + days);
+                textViewhour.setText("" + hours);
+                textViewmin.setText("" + minutes);
+                textViewsec.setText("" + seconds);
             }
 
             @Override
@@ -132,13 +136,13 @@ public class MyAppointactivity extends AppCompatActivity {
                 date = dataSnapshot.child("reservation_Date").getValue().toString();
                 time = dataSnapshot.child("reservation_Time").getValue().toString();
 
-                textViewname.setText("Name: "+name);
-                textViewphone.setText("Phone: "+phone);
-                textViewcause.setText("Appointment Cause: "+cause);
-                textViewaddress.setText("Address: "+address);
+                textViewname.setText(""+name);
+                textViewphone.setText(""+phone);
+                textViewcause.setText(""+cause);
+                textViewaddress.setText(""+address);
 
-                textViewdate.setText("Date: "+date);
-                textViewtime.setText("At: "+time);
+                textViewdate.setText(""+date);
+                textViewtime.setText(""+time);
 
 
                 String[] parts_date = date.split("-");
@@ -177,8 +181,10 @@ public class MyAppointactivity extends AppCompatActivity {
         textViewdate = (TextView) findViewById(R.id.textViewdate);
         textViewtime = (TextView) findViewById(R.id.textViewtime);
 
-        textViewdatecount = (TextView) findViewById(R.id.textViewdatecount);
-
+        textViewday = (TextView) findViewById(R.id.textViewday);
+        textViewhour = (TextView) findViewById(R.id.textViewhour);
+        textViewmin = (TextView) findViewById(R.id.textViewminute);
+        textViewsec = (TextView) findViewById(R.id.textViewsecond);
 
        // get the logged in user request key
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("request");
@@ -197,104 +203,5 @@ public class MyAppointactivity extends AppCompatActivity {
             }
         });
 
-/*
-        myRef.child(key).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                //for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) { // key 1 (unique id)
-
-                    name = dataSnapshot.child("patient_name").getValue().toString();
-                    phone = dataSnapshot.child("patient_phone").getValue().toString();
-                    address = dataSnapshot.child("patient_address").getValue().toString();
-
-                    cause = dataSnapshot.child("reservation_Cause").getValue().toString();
-                    date = dataSnapshot.child("reservation_Date").getValue().toString();
-                    time = dataSnapshot.child("reservation_Time").getValue().toString();
-
-                    textViewname.append(name);
-                    textViewphone.append(phone);
-                    textViewcause.append(cause);
-                    textViewaddress.append(address);
-
-                    textViewdate.setText("Date: "+date);
-                    textViewtime.setText("At: "+time);
-
-
-                String[] parts_date = date.split("-");
-                day = parts_date[0]; // day
-                month = parts_date[1]; // month
-                year = parts_date[2]; // year
-
-                String[] parts_time = time.split(":");
-                hour = parts_time[0]; // hour
-                minute = parts_time[1]; // minutes
-                //textViewdatecount.setText(Integer.parseInt(hour)+" "+Integer.parseInt(minute));
-               counter(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day),Integer.parseInt(hour),Integer.parseInt(minute));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-    private void delete_request(final String remove){
-        //delete request from DB
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Requests");
-        reference.child(remove).removeValue();
-
-        // update request under user key
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = currentFirebaseUser.getUid();
-        final DatabaseReference referenceupdate = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("request");
-        referenceupdate.setValue("nothing");
-
-    }
-
-    // counter
- private void counter(int yearint,int monthint,int dayint,int hourint,int minint) {
-
-        Calendar start_calendar = Calendar.getInstance();
-        Calendar end_calendar = Calendar.getInstance();
-        // end_calendar.set(2020, 11, 20,9,58); // 10 = November, month start at 0 = January
-
-        end_calendar.set(yearint,monthint-1 ,dayint ,hourint,minint);
-
-        long start_millis = start_calendar.getTimeInMillis(); //get the start time in milliseconds
-        long end_millis = end_calendar.getTimeInMillis(); //get the end time in milliseconds
-        long total_millis = (end_millis - start_millis); //total time in milliseconds
-
-        //1000 = 1 second interval
-        CountDownTimer cdt = new CountDownTimer(total_millis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                long days = TimeUnit.MILLISECONDS.toDays(millisUntilFinished);
-                millisUntilFinished -= TimeUnit.DAYS.toMillis(days);
-
-                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
-                millisUntilFinished -= TimeUnit.HOURS.toMillis(hours);
-
-                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
-                millisUntilFinished -= TimeUnit.MINUTES.toMillis(minutes);
-
-                long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
-
-                textViewdatecount.setText("Days: "+days + "\nhours: " + hours + "\nminutes: " + minutes + "\nseconds: " + seconds); //You can compute the millisUntilFinished on hours/minutes/seconds
-            }
-
-            @Override
-            public void onFinish() {
-
-
-                textViewdatecount.setText(key);
-                // delete the request and update request child under user
-                //delete_request(key);
-
-            }
-        };
-        cdt.start();
-*/
     }
 }
