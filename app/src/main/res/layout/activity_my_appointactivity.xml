@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@id/imageViewlogoappoin"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.05"
         android:layout_marginTop="10dp"
         android:textColor="@android:color/background_dark"
         android:textStyle="bold"
@@ -56,7 +56,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.05"
         android:background="@drawable/textlines"
         android:textColor="@android:color/background_dark"
         android:textStyle="bold"/>
@@ -83,7 +83,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.05"
         android:background="@drawable/textlines"
         android:textColor="@android:color/background_dark"
         android:textStyle="bold"/>
@@ -97,7 +97,6 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@+id/textViewa"
         android:layout_marginLeft="10dp"
-        app:layout_constraintHorizontal_bias="0.1"
         android:textColor="@android:color/background_dark"
        />
 
@@ -105,14 +104,15 @@
         android:id="@+id/textViewc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Reason for consultation: "
-        app:layout_constraintTop_toBottomOf="@+id/textViewaddress"
-        android:layout_marginTop="10dp"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        android:textColor="@android:color/background_dark"
-        android:textStyle="bold"/>
+        android:background="@drawable/textlines"
+        app:layout_constraintTop_toBottomOf="@+id/textViewaddress" />
 
     <TextView
         android:id="@+id/textViewcause"
@@ -123,8 +123,9 @@
         android:layout_marginTop="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.07"
         android:textColor="@android:color/background_dark"
+
         />
 
     <TextView
@@ -138,6 +139,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
         android:textColor="@android:color/background_dark"
+        android:background="@drawable/textlines"
         android:textStyle="bold"/>
 
     <TextView
@@ -149,7 +151,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toRightOf="@+id/textViewd"
         android:layout_marginLeft="10dp"
-        app:layout_constraintHorizontal_bias="0.35"
+
         android:textColor="@android:color/background_dark"
         />
 
@@ -163,6 +165,7 @@
         app:layout_constraintLeft_toRightOf="@+id/textViewdate"
         android:layout_marginLeft="30dp"
         android:textColor="@android:color/background_dark"
+        android:background="@drawable/textlines"
         android:textStyle="bold"/>
 
     <TextView
@@ -186,7 +189,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="0.08"
         android:textColor="#006699"
         android:textSize="20dp"
         android:textStyle="bold"
