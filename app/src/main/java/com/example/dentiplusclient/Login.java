@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
@@ -34,6 +36,49 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth auth;
     private ImageView backimg;
     private String requests;
+    private String status;
+    private String request_key="request_key";
+
+    // remember user email and pass
+    public static final String PREFS_NAME = "MyPrefsFile";
+    private static final String PREF_USERNAME = "username";
+    private static final String PREF_PASSWORD = "password";
+
+    // check reservation status if user already did a reservation
+    private void check_reservation_status(String request_key_1){
+        //check the req status if exist
+        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Requests");
+
+        // get request status
+        myRef.child(request_key_1).child("status").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                status = dataSnapshot.getValue().toString();
+
+                if (status.equals("1")) { // request accepted
+                    Intent newintent = new Intent(Login.this, MyAppointactivity.class);
+                    newintent.putExtra(request_key,request_key_1);
+                    startActivity(newintent);
+                    finish();
+                }else if(status.equals("0")){ //declined
+                    Intent newintent = new Intent(Login.this, AppointementDeclined.class);
+                    newintent.putExtra(request_key,request_key_1);
+                    startActivity(newintent);
+                    finish();
+                }else if(status.equals("2")){ //pendingg
+                    Intent newintent = new Intent(Login.this, WaitResponse.class);
+                    newintent.putExtra(request_key,request_key_1);
+                    startActivity(newintent);
+                    finish();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     // check if user has already a reservation
     private void check_user_reservation(){
@@ -42,9 +87,10 @@ public class Login extends AppCompatActivity {
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = currentFirebaseUser.getUid();
 
+        // check if the logged in user has a request or not
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("request");
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 requests = snapshot.getValue().toString();
@@ -53,10 +99,8 @@ public class Login extends AppCompatActivity {
                     Intent intent = new Intent(Login.this, ReservationActivity.class);
                     startActivity(intent);
                     finish();
-                }else{ //there's an appointment
-                    Intent intent = new Intent(Login.this, MyAppointactivity.class);
-                    startActivity(intent);
-                    finish();
+                }else{ //there's an appointment so check the request status (2 = pending)
+                    check_reservation_status(requests);
                 }
             }
 
@@ -72,7 +116,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        final ProgressDialog progressDialog = new ProgressDialog(this);
         auth = FirebaseAuth.getInstance();
 
         inputEmail=(EditText)findViewById(R.id.editTextEmail);
@@ -80,10 +124,26 @@ public class Login extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btn_login);
         backimg = (ImageView) findViewById(R.id.imageViewbacklogin);
 
+        // check if user has already logged in previously on this device
+        SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+        String username = pref.getString(PREF_USERNAME, null);
+        String pass = pref.getString(PREF_PASSWORD, null);
+
+        if (username == null || pass == null) {
+            //do nothing
+        }else{
+            inputEmail.setText(username);
+            inputPassword.setText(pass);
+        }
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = inputEmail.getText().toString();
+
+                progressDialog.setTitle("Signing in...");
+                progressDialog.show();
+
+                final String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
@@ -109,12 +169,17 @@ public class Login extends AppCompatActivity {
                                 //progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
                                     // there was an error
-
                                     Toast.makeText(Login.this, "Email or Password in incorrect", Toast.LENGTH_LONG).show();
-
                                 } else{
+                                    //save user info on the phone
+                                    getSharedPreferences(PREFS_NAME,MODE_PRIVATE)
+                                            .edit()
+                                            .putString(PREF_USERNAME, email)
+                                            .putString(PREF_PASSWORD, password)
+                                            .commit();
 
                                     check_user_reservation();
+                                    progressDialog.dismiss();
                                 }
                             }
                         });
@@ -129,5 +194,22 @@ public class Login extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // your code.
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(Login.this);
+        builder.setMessage("Do you want to close the app?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finishAffinity();
+                        System.exit(0);
+                    }
+                })
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton("No", null)
+                .show();
     }
 }

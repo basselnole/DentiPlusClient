@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -34,33 +36,15 @@ public class MyAppointactivity extends AppCompatActivity {
     private TextView textViewname,textViewphone,textViewaddress,textViewcause,textViewdate,textViewtime;
     private TextView textViewday,textViewhour,textViewmin,textViewsec;
     //firebase setup
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Requests");
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference myRef = database.getReference("Requests");
 
-    DatabaseReference referenceupdate = FirebaseDatabase.getInstance().getReference("Users");
-    DatabaseReference reference_del = FirebaseDatabase.getInstance().getReference("Requests");
 
-    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-    String uid = currentFirebaseUser.getUid();
+    private FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private String uid = currentFirebaseUser.getUid();
 
     private String day,month,year,hour,minute;
-    private MaterialAlertDialogBuilder builder;
-
-    private void update_request(){
-        // update request under user key
-        referenceupdate.child(uid).child("request").setValue("nothing");
-    }
-
-    private void delete_request(final String remove){
-        //delete request from DB
-        update_request();
-        reference_del.child(remove).removeValue();
-
-
-        Intent newintent = new Intent(MyAppointactivity.this, ReservationActivity.class);
-        startActivity(newintent);
-        finish();
-    }
+    private Intent intent_appo;
 
 
 
@@ -102,27 +86,24 @@ public class MyAppointactivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                delete_request(key);
-
+                intent_appo = new Intent(MyAppointactivity.this, AppointementDone.class);
+                intent_appo.putExtra(request_key, key);
+                startActivity(intent_appo);
+                finish();
             }
         };
         cdt.start();
 
         } else{
-            //Toast.makeText(MyAppointactivity.this, "Appointment Declined", Toast.LENGTH_SHORT).show();
-        builder = new MaterialAlertDialogBuilder(MyAppointactivity.this);
-         builder.setMessage("Appointment Done")
-                .setCancelable(false)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        delete_request(key);
-                    }
-                }).show();
+            intent_appo = new Intent(MyAppointactivity.this, AppointementDone.class);
+            intent_appo.putExtra(request_key, key);
+            startActivity(intent_appo);
+            finish();
          }
     }
 
     private void get_reservation_info(String req_key_1){
-        myRef.child(req_key_1).addValueEventListener(new ValueEventListener() {
+        myRef.child(req_key_1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -169,9 +150,7 @@ public class MyAppointactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_appointactivity);
 
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Preparing...");
-        progressDialog.show();
+
 
         textViewname = (TextView) findViewById(R.id.textViewname);
         textViewphone = (TextView) findViewById(R.id.textViewphone);
@@ -188,13 +167,12 @@ public class MyAppointactivity extends AppCompatActivity {
 
        // get the logged in user request key
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("request");
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 key=snapshot.getValue().toString();
                 //textViewdatecount.setText(key);
                 get_reservation_info(key);
-                progressDialog.dismiss();
             }
 
             @Override
@@ -204,4 +182,22 @@ public class MyAppointactivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        // your code.
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MyAppointactivity.this);
+        builder.setMessage("Do you want to close the app?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finishAffinity();
+                        System.exit(0);
+                    }
+                })
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton("No", null)
+                .show();
+    }
+
 }

@@ -3,6 +3,8 @@ package com.example.dentiplusclient;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -38,10 +43,21 @@ public class ReservationActivity extends AppCompatActivity {
     private EditText editTextname,editTextphone,editTextstN,editTextSt,editTextFloorN,editTextApartn,editTextCause;
 
     private String request_key="request_key";
+    private String key;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    DatabaseReference myRef = database.getReference("Requests").push();
+    private DatabaseReference myRef = database.getReference("Requests").push();
+
+    private void add_request(final String req_parent){
+
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = currentFirebaseUser.getUid();
+
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("request");
+        reference.setValue(req_parent);
+
+    }
 
     private void send_appointement_request(final String date,final String time,final String name,final String phone,final String address,final String cause){
 
@@ -58,12 +74,13 @@ public class ReservationActivity extends AppCompatActivity {
 
         myRef.setValue(reservation_details);
         //get the push key value
-        String key = myRef.getKey();
+        key = myRef.getKey();
+        add_request(key);
 
         Intent intent = new Intent(ReservationActivity.this, WaitResponse.class);
         intent.putExtra(request_key,key);
-
         startActivity(intent);
+        finish();
     }
 
 
@@ -175,11 +192,28 @@ public class ReservationActivity extends AppCompatActivity {
                 //cause
                 cause= editTextCause.getText().toString();
 
-                address = stN +", "+st+"\nApart N°: "+apart+"\n Floor N°: "+floor;
+                address = stN +", "+st+"\nApart N°: "+apart+"\nFloor N°: "+floor;
 
                 send_appointement_request(Date,Time,name,phone,address,cause);
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // your code.
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ReservationActivity.this);
+        builder.setMessage("Do you want to close the app?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finishAffinity();
+                        System.exit(0);
+                    }
+                })
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton("No", null)
+                .show();
     }
 }
