@@ -88,19 +88,24 @@ public class Login extends AppCompatActivity {
         String uid = currentFirebaseUser.getUid();
 
         // check if the logged in user has a request or not
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("request");
+       // final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("request");
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                requests = snapshot.getValue().toString();
+                if (snapshot.hasChild(uid)){
+                    requests = snapshot.child(uid).child("request").getValue().toString();
 
-                if (requests.equals("nothing")){ // there's no requests
-                    Intent intent = new Intent(Login.this, ReservationActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else{ //there's an appointment so check the request status (2 = pending)
-                    check_reservation_status(requests);
+                    if (requests.equals("nothing")){ // there's no requests
+                        Intent intent = new Intent(Login.this, ReservationActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{ //there's an appointment so check the request status (2 = pending)
+                        check_reservation_status(requests);
+                    }
+                }else{
+                    Toast toast=Toast.makeText(getApplicationContext(),"Email Does not exist",Toast.LENGTH_LONG);
                 }
             }
 
