@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +17,16 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
@@ -33,6 +38,7 @@ public class ReservationActivity extends AppCompatActivity {
     private TextView textViewcalendar;
 
     private Calendar calendar;
+
     private String Date,Time;
     private Button done,nextbtn;
     private ImageView back;
@@ -83,6 +89,63 @@ public class ReservationActivity extends AppCompatActivity {
         finish();
     }
 
+    private String refdate,reftime,refday,refmonth,refyear,refhour,refminute;
+
+    private void get_date_from_DB(){
+        //firebase setup
+        final FirebaseDatabase databasedate = FirebaseDatabase.getInstance();
+        final DatabaseReference mydateref= databasedate.getReference("datetime");
+
+        mydateref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                //for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) { // key 1 (unique id)
+
+
+                refdate = dataSnapshot.child("date").getValue().toString();
+               // reftime = dataSnapshot.child("time").getValue().toString();
+
+                String[] parts_date_ref = refdate.split("-");
+                refday = parts_date_ref[0]; // day
+                refmonth = parts_date_ref[1]; // month
+                refyear = parts_date_ref[2]; // year
+
+             /*   String[] parts_time_ref = reftime.split(":");
+                refhour = parts_time_ref[0]; // hour
+                refminute = parts_time_ref[1]; // minutes*/
+                //textViewdatecount.setText(Integer.parseInt(hour)+" "+Integer.parseInt(minute));
+               // textViewcalendar.setText(Integer.parseInt(refday)+" "+Integer.parseInt(refmonth)+" "+Integer.parseInt(refyear)+" "+Integer.parseInt(refhour)+" "+Integer.parseInt(refminute));
+
+                calendar = Calendar.getInstance();
+                int current_hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int current_min = calendar.get(Calendar.MINUTE);
+
+                int current_year = Integer.parseInt(refyear);
+                int current_month = Integer.parseInt(refmonth);
+                int current_day = Integer.parseInt(refday);
+
+                calendar.set(Calendar.YEAR,current_year);
+                calendar.set(Calendar.MONTH,current_month-1);
+                calendar.set(Calendar.DAY_OF_MONTH,current_day);
+                calendar.set(Calendar.HOUR,current_hour );
+                calendar.set(Calendar.MINUTE,current_min);
+
+                // min date to calendar is today and now
+                calendarView.setMinDate(calendar.getTimeInMillis());
+                timePicker.setIs24HourView(true);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,14 +169,16 @@ public class ReservationActivity extends AppCompatActivity {
         editTextApartn = (EditText) findViewById(R.id.editTextPatientapart);
         editTextCause = (EditText) findViewById(R.id.editTextPatientcause);
 
-        calendar = Calendar.getInstance();
+        get_date_from_DB();
+
+/*       calendar = Calendar.getInstance();
         int current_hour = calendar.get(Calendar.HOUR_OF_DAY);
         int current_min = calendar.get(Calendar.MINUTE);
         int current_year = calendar.get(Calendar.YEAR);
         int current_month = calendar.get(Calendar.MONTH);
         int current_day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        calendar.set(Calendar.YEAR,current_year);
+       calendar.set(Calendar.YEAR,current_year);
         calendar.set(Calendar.MONTH,current_month);
         calendar.set(Calendar.DAY_OF_MONTH,current_day);
 
@@ -125,7 +190,7 @@ public class ReservationActivity extends AppCompatActivity {
         timePicker.setIs24HourView(true);
         timePicker.setHour(current_hour);
         timePicker.setMinute(current_min);
-
+*/
 
         // Add Listener in calendar
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
