@@ -173,6 +173,7 @@
         android:ems="10"
         android:inputType="textMultiLine"
         android:hint="Eh el a3rad"
+        android:paddingLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="6dp"/>
 
