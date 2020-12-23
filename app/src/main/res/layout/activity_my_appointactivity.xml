@@ -22,15 +22,15 @@
         android:id="@+id/textViewn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Patient Name : "
-        app:layout_constraintTop_toBottomOf="@id/imageViewlogoappoin"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
         android:layout_marginTop="10dp"
+        android:background="@drawable/textlines"
+        android:text="Patient Name :"
         android:textColor="@android:color/background_dark"
         android:textStyle="bold"
-        android:background="@drawable/textlines"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewlogoappoin"
 
         />
 
@@ -51,15 +51,15 @@
         android:id="@+id/textViewp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phone : "
-        app:layout_constraintTop_toBottomOf="@+id/textViewname"
         android:layout_marginTop="10dp"
+        android:background="@drawable/textlines"
+        android:text="Phone :"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        android:background="@drawable/textlines"
-        android:textColor="@android:color/background_dark"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toBottomOf="@+id/textViewname" />
 
     <TextView
         android:id="@+id/textViewphone"
@@ -78,15 +78,15 @@
         android:id="@+id/textViewa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Address : "
-        app:layout_constraintTop_toBottomOf="@+id/textViewphone"
         android:layout_marginTop="10dp"
+        android:background="@drawable/textlines"
+        android:text="Address :"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        android:background="@drawable/textlines"
-        android:textColor="@android:color/background_dark"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toBottomOf="@+id/textViewphone" />
 
     <TextView
         android:id="@+id/textViewaddress"
@@ -132,15 +132,15 @@
         android:id="@+id/textViewd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date : "
-        app:layout_constraintTop_toBottomOf="@+id/textViewcause"
         android:layout_marginTop="10dp"
+        android:background="@drawable/textlines"
+        android:text="Date :"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        android:textColor="@android:color/background_dark"
-        android:background="@drawable/textlines"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toBottomOf="@+id/textViewcause" />
 
     <TextView
         android:id="@+id/textViewdate"
@@ -159,14 +159,14 @@
         android:id="@+id/textViewt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time : "
-        app:layout_constraintTop_toBottomOf="@+id/textViewcause"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@+id/textViewdate"
         android:layout_marginLeft="30dp"
-        android:textColor="@android:color/background_dark"
+        android:layout_marginTop="10dp"
         android:background="@drawable/textlines"
-        android:textStyle="bold"/>
+        android:text="Time :"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/textViewdate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewcause" />
 
     <TextView
         android:id="@+id/textViewtime"
@@ -181,15 +181,30 @@
         />
 
     <TextView
+        android:id="@+id/textViewline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/textlines"
+        android:text=""
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"
+       app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewtime" />
+
+    <TextView
         android:id="@+id/textViewda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Day "
-        app:layout_constraintTop_toBottomOf="@+id/textViewdate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewline"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintHorizontal_bias="0.08"
         android:textColor="#006699"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -204,7 +219,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintHorizontal_bias="0.09"
         android:textColor="#006699"
         android:textSize="20dp"
         />
@@ -214,7 +229,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hour "
-        app:layout_constraintTop_toBottomOf="@+id/textViewdate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewline"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toRightOf="@+id/textViewda"
         android:layout_marginLeft="25dp"
@@ -242,7 +257,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Minute "
-        app:layout_constraintTop_toBottomOf="@+id/textViewdate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewline"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toRightOf="@+id/textViewh"
         android:layout_marginLeft="25dp"
@@ -270,7 +285,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Second "
-        app:layout_constraintTop_toBottomOf="@+id/textViewdate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewline"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toRightOf="@+id/textViewM"
         android:layout_marginLeft="25dp"
