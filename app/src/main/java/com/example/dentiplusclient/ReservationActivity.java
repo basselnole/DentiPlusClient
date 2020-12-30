@@ -128,8 +128,8 @@ public class ReservationActivity extends AppCompatActivity {
                 calendar.set(Calendar.YEAR,current_year);
                 calendar.set(Calendar.MONTH,current_month-1);
                 calendar.set(Calendar.DAY_OF_MONTH,current_day);
-                calendar.set(Calendar.HOUR,current_hour );
-                calendar.set(Calendar.MINUTE,current_min);
+               // calendar.set(Calendar.HOUR,current_hour );
+               // calendar.set(Calendar.MINUTE,current_min);
 
                 // min date to calendar is today and now
                 calendarView.setMinDate(calendar.getTimeInMillis());

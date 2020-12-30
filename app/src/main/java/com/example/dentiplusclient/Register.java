@@ -3,6 +3,7 @@ package com.example.dentiplusclient;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,8 +29,12 @@ public class Register extends AppCompatActivity {
     private FirebaseAuth auth;
     private ImageView registerimg;
 
+    private ProgressDialog progressDialog;
 
     private void signup(){
+
+        progressDialog.setTitle("Registering...");
+        progressDialog.show();
 
         final String email = inputEmail.getText().toString().trim();
         String password = inputPassword.getText().toString().trim();
@@ -38,21 +43,33 @@ public class Register extends AppCompatActivity {
         final String request ="nothing";
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please enter your email address!", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
             return;
         }
 
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+        else if (TextUtils.isEmpty(password)) {
+            Toast.makeText(getApplicationContext(), "Please enter a password!", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
             return;
         }
 
-        if (password.length() < 6) {
+       else if (password.length() < 6) {
             Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
             return;
         }
-
-        //progressBar.setVisibility(View.VISIBLE);
+        else if (TextUtils.isEmpty(name)) {
+            Toast.makeText(getApplicationContext(), "Please Enter your name!", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+            return;
+        }
+        else if (TextUtils.isEmpty(phone)) {
+            Toast.makeText(getApplicationContext(), "Please Enter your phone!", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+            return;
+        }
+       else{
         //create user
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
@@ -65,10 +82,12 @@ public class Register extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             Toast.makeText(Register.this, "Registration failed. \nEmail already exist",
                                     Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                         }
                         // registration succ
                         else {
                             Toast.makeText(Register.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                             // heta di ashn a3ml add li info el users fl database 3ndi
                                 Users user = new Users(name, email, phone,request);
                                 FirebaseDatabase.getInstance().getReference("Users")
@@ -81,12 +100,15 @@ public class Register extends AppCompatActivity {
                         }
                     }
                 });
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+         progressDialog = new ProgressDialog(this);
 
         registerimg = (ImageView) findViewById(R.id.imageViewbackregister);
 
