@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReservationActivity">
@@ -79,10 +79,8 @@
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-
         android:id="@+id/layoutplus"
         app:layout_constraintTop_toBottomOf="@id/date_view_text"
-
         android:visibility="gone"
     >
 
@@ -165,17 +163,225 @@
         android:layout_marginLeft="6dp"
         />
 
-    <EditText
-        android:id="@+id/editTextPatientcause"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/edittext"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:hint="Eh el a3rad"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="6dp"/>
+        <TextView
+            android:id="@+id/textquest1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="1. if you are experiencing pain can you give it \na rating out of 10 where 1 is the least painful\nand 10 is the most painful?"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <EditText
+            android:id="@+id/editTextquest1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edittext"
+            android:ems="10"
+            android:inputType="phone"
+            android:hint="1 to 10"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <TextView
+            android:id="@+id/textquest2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/black"
+            android:text="2. what increases the pain?"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/radioGroupq2">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioquest2hot"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+           android:text="Hot foods and liquids"
+            android:paddingLeft="5dp"
+            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioquest2cold"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Cold foods and liquids"
+            android:paddingLeft="5dp"
+            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioquest2eat"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Eating"
+            android:paddingLeft="5dp"
+            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioquest2spon"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Spontaneous"
+            android:paddingLeft="5dp"
+            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioquest2wake"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Wakes me up from sleep"
+            android:paddingLeft="5dp"
+            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textquest3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="3. How do you deal with the pain?"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="6dp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/radioGroupq3">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioquest3anal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Analgesics"
+            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioquest3top"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:text="Topical gels or creams"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioquest3natu"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Natural alternatives"
+            android:paddingLeft="5dp"
+            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioquest3disap"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="It disappears on it own after a few seconds"
+            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textquest4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/black"
+            android:text="4. How urgent do you think your emergency is from 1 to 10?"
+            android:paddingLeft="10dp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="6dp"/>
+
+        <EditText
+            android:id="@+id/editTextquest4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edittext"
+            android:ems="10"
+            android:inputType="phone"
+            android:hint="1 to 10"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <TextView
+            android:id="@+id/textquest5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="5. Have you had any operations in the past?\n Can you kindly name it?"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="6dp"/>
+
+        <EditText
+            android:id="@+id/editTextquest5"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edittext"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <TextView
+            android:id="@+id/textquest6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="6. Do you take any medications?\n Can you kindly write them done"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="6dp"/>
+
+        <EditText
+            android:id="@+id/editTextquest6"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edittext"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
 
         <android.widget.Button
             android:id="@+id/buttondonecalendar"
@@ -192,7 +398,7 @@
 
 
 
-   </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

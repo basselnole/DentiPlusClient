@@ -14,6 +14,8 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -34,6 +36,10 @@ public class ReservationActivity extends AppCompatActivity {
 
     private CalendarView calendarView;
     private TimePicker timePicker;
+    private RadioButton radioButtonq2A,radioButtonq2B,radioButtonq2C,radioButtonq2D,radioButtonq2E,radioQ2btn,
+            radioButtonq3A,radioButtonq3B,radioButtonq3C,radioButtonq3D,radioButtonq3E,radioQ3btn;// hnkml man hena
+
+    private RadioGroup radioGroupQ2,radioGroupQ3;
 
     private TextView textViewcalendar;
 
@@ -45,8 +51,9 @@ public class ReservationActivity extends AppCompatActivity {
 
     private LinearLayout linearLayout;
 
-    private String name,phone,stN,st,floor,apart,address,cause;
-    private EditText editTextname,editTextphone,editTextstN,editTextSt,editTextFloorN,editTextApartn,editTextCause;
+    private String name,phone,stN,st,floor,apart,address,cause,stringq1,stringq2,stringq3,stringq4,stringq5,stringq6;
+    private EditText editTextname,editTextphone,editTextstN,editTextSt,editTextFloorN,editTextApartn,editTextCause
+            ,editTextQ1,editTextQ4,editTextQ5,editTextQ6;
 
     private String request_key="request_key";
     private String key;
@@ -147,11 +154,35 @@ public class ReservationActivity extends AppCompatActivity {
 
     }
 
+     private void get_q2_ans(){
+         int selectedId=radioGroupQ2.getCheckedRadioButtonId();
+         radioQ2btn=(RadioButton)findViewById(selectedId);
+        // Toast.makeText(ReservationActivity.this,radioQ2btn.getText(),Toast.LENGTH_SHORT).show();
+     }
+
+    private void get_q3_ans(){
+        int selectedId3=radioGroupQ3.getCheckedRadioButtonId();
+        radioQ3btn=(RadioButton)findViewById(selectedId3);
+       // Toast.makeText(ReservationActivity.this,radioQ3btn.getText(),Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
 
+        // survey
+       //Q2 & 3
+        radioGroupQ2=(RadioGroup)findViewById(R.id.radioGroupq2);
+        radioGroupQ3=(RadioGroup)findViewById(R.id.radioGroupq3);
+        //
+
+        //Q1,4,5,6
+        editTextQ1 = (EditText) findViewById(R.id.editTextquest1);
+        editTextQ4 = (EditText) findViewById(R.id.editTextquest4);
+        editTextQ5 = (EditText) findViewById(R.id.editTextquest5);
+        editTextQ6 = (EditText) findViewById(R.id.editTextquest6);
+        //
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
         textViewcalendar = (TextView) findViewById(R.id.date_view_text);
@@ -167,7 +198,7 @@ public class ReservationActivity extends AppCompatActivity {
         editTextSt = (EditText) findViewById(R.id.editTextPatientstreet);
         editTextFloorN = (EditText) findViewById(R.id.editTextPatientfloor);
         editTextApartn = (EditText) findViewById(R.id.editTextPatientapart);
-        editTextCause = (EditText) findViewById(R.id.editTextPatientcause);
+       // editTextCause = (EditText) findViewById(R.id.editTextPatientcause);
 
         get_date_from_DB();
 
@@ -191,7 +222,6 @@ public class ReservationActivity extends AppCompatActivity {
         timePicker.setHour(current_hour);
         timePicker.setMinute(current_min);
 */
-
         // Add Listener in calendar
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -255,9 +285,26 @@ public class ReservationActivity extends AppCompatActivity {
                 apart = editTextApartn.getText().toString();
 
                 //cause
-                cause= editTextCause.getText().toString();
+            //    cause= editTextCause.getText().toString();
+                    get_q2_ans();
+                    get_q3_ans();
 
                 address = stN +", "+st+"\nApart N°: "+apart+"\nFloor N°: "+floor;
+                stringq1 ="1. if you are experiencing pain can you give it \na rating out of 10 where 1 is the least painful\nand 10 is the most painful?\n"
+                        +editTextQ1.getText().toString()+"\n";
+                stringq2 ="2. what increases the pain?\n"
+                        +radioQ2btn.getText().toString()+"\n";
+                stringq3 ="3. How do you deal with the pain?\n"
+                        +radioQ3btn.getText().toString()+"\n";
+                stringq4 ="4. How urgent do you think your emergency is from 1 to 10?\n"
+                        +editTextQ4.getText().toString()+"\n";
+                stringq5 ="5. Have you had any operations in the past?\n Can you kindly name it?\n"
+                        +editTextQ5.getText().toString()+"\n";
+                stringq6 ="6. Do you take any medications?\n Can you kindly write them done\n"
+                        +editTextQ6.getText().toString()+"\n";
+
+                cause = stringq1+"\n"+stringq2+"\n"+stringq3+"\n"+stringq4+"\n"+stringq5+"\n"+stringq6+"\n";
+                //Toast.makeText(ReservationActivity.this,cause,Toast.LENGTH_SHORT).show();
 
                 send_appointement_request(Date,Time,name,phone,address,cause);
             }
