@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,8 +37,8 @@ public class ReservationActivity extends AppCompatActivity {
 
     private CalendarView calendarView;
     private TimePicker timePicker;
-    private RadioButton radioButtonq2A,radioButtonq2B,radioButtonq2C,radioButtonq2D,radioButtonq2E,radioQ2btn,
-            radioButtonq3A,radioButtonq3B,radioButtonq3C,radioButtonq3D,radioButtonq3E,radioQ3btn;// hnkml man hena
+    private CheckBox checkButtonq2A,checkButtonq2B,checkButtonq2C,checkButtonq2D,checkButtonq2E,checkQ2btn,
+            checkButtonq3A,checkButtonq3B,checkButtonq3C,checkButtonq3D,checkButtonq3E,checkQ3btn;// hnkml man hena
 
     private RadioGroup radioGroupQ2,radioGroupQ3;
 
@@ -51,12 +52,14 @@ public class ReservationActivity extends AppCompatActivity {
 
     private LinearLayout linearLayout;
 
-    private String name,phone,stN,st,floor,apart,address,cause,stringq1,stringq2,stringq3,stringq4,stringq5,stringq6;
+    private String name,phone,stN,st,floor,apart,address,cause,stringq1,stringq2,stringq3,stringq4,stringq5,stringq6,stringq7;
     private EditText editTextname,editTextphone,editTextstN,editTextSt,editTextFloorN,editTextApartn,editTextCause
-            ,editTextQ1,editTextQ4,editTextQ5,editTextQ6;
+            ,editTextQ1,editTextQ4,editTextQ5,editTextQ6,editTextQ7;
 
     private String request_key="request_key";
     private String key;
+    StringBuilder Q2Answer=new StringBuilder();
+    StringBuilder Q3Answer=new StringBuilder();
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -96,7 +99,7 @@ public class ReservationActivity extends AppCompatActivity {
         finish();
     }
 
-    private String refdate,reftime,refday,refmonth,refyear,refhour,refminute;
+    private String refdate,refday,refmonth,refyear;
 
     private void get_date_from_DB(){
         //firebase setup
@@ -155,15 +158,45 @@ public class ReservationActivity extends AppCompatActivity {
     }
 
      private void get_q2_ans(){
-         int selectedId=radioGroupQ2.getCheckedRadioButtonId();
-         radioQ2btn=(RadioButton)findViewById(selectedId);
+         //int selectedId=radioGroupQ2.getCheckedRadioButtonId();
+         //radioQ2btn=(RadioButton)findViewById(selectedId);
         // Toast.makeText(ReservationActivity.this,radioQ2btn.getText(),Toast.LENGTH_SHORT).show();
+         Q2Answer.setLength(0); //clear it
+
+         if (checkButtonq2A.isChecked()){
+             Q2Answer.append(checkButtonq2A.getText().toString()+"\n");
+         }
+         if (checkButtonq2B.isChecked()){
+             Q2Answer.append(checkButtonq2B.getText().toString()+"\n");
+         }
+         if (checkButtonq2C.isChecked()){
+             Q2Answer.append(checkButtonq2C.getText().toString()+"\n");
+         }
+         if (checkButtonq2D.isChecked()){
+             Q2Answer.append(checkButtonq2D.getText().toString()+"\n");
+         }
+         if (checkButtonq2E.isChecked()){
+             Q2Answer.append(checkButtonq2E.getText().toString()+"\n");
+         }
      }
 
     private void get_q3_ans(){
-        int selectedId3=radioGroupQ3.getCheckedRadioButtonId();
-        radioQ3btn=(RadioButton)findViewById(selectedId3);
-       // Toast.makeText(ReservationActivity.this,radioQ3btn.getText(),Toast.LENGTH_SHORT).show();
+
+        Q3Answer.setLength(0); //clear it
+
+        if (checkButtonq3A.isChecked()){
+            Q3Answer.append(checkButtonq3A.getText().toString()+"\n");
+        }
+        if (checkButtonq3B.isChecked()){
+            Q3Answer.append(checkButtonq3B.getText().toString()+"\n");
+        }
+        if (checkButtonq3C.isChecked()){
+            Q3Answer.append(checkButtonq3C.getText().toString()+"\n");
+        }
+        if (checkButtonq3D.isChecked()){
+            Q3Answer.append(checkButtonq3D.getText().toString()+"\n");
+        }
+
     }
 
     @Override
@@ -172,9 +205,18 @@ public class ReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reservation);
 
         // survey
-       //Q2 & 3
-        radioGroupQ2=(RadioGroup)findViewById(R.id.radioGroupq2);
-        radioGroupQ3=(RadioGroup)findViewById(R.id.radioGroupq3);
+        //Q2
+        checkButtonq2A =(CheckBox) findViewById(R.id.checkquest2hot);
+        checkButtonq2B =(CheckBox) findViewById(R.id.checkquest2cold);
+        checkButtonq2C =(CheckBox) findViewById(R.id.checkquest2eat);
+        checkButtonq2D =(CheckBox) findViewById(R.id.checkquest2spon);
+        checkButtonq2E =(CheckBox) findViewById(R.id.checkquest2wake);
+
+       //Q3
+        checkButtonq3A =(CheckBox) findViewById(R.id.checkquest3anal);
+        checkButtonq3B =(CheckBox) findViewById(R.id.checkquest3top);
+        checkButtonq3C =(CheckBox) findViewById(R.id.checkquest3natu);
+        checkButtonq3D =(CheckBox) findViewById(R.id.checkquest3disap);
         //
 
         //Q1,4,5,6
@@ -182,6 +224,7 @@ public class ReservationActivity extends AppCompatActivity {
         editTextQ4 = (EditText) findViewById(R.id.editTextquest4);
         editTextQ5 = (EditText) findViewById(R.id.editTextquest5);
         editTextQ6 = (EditText) findViewById(R.id.editTextquest6);
+        editTextQ7 = (EditText) findViewById(R.id.editTextquest7optional);
         //
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
@@ -275,6 +318,10 @@ public class ReservationActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                get_q2_ans();
+                get_q3_ans();
+
                 // send request to firebase then go to waiting response activity
                 name = editTextname.getText().toString();
                 phone = editTextphone.getText().toString();
@@ -284,29 +331,76 @@ public class ReservationActivity extends AppCompatActivity {
                 floor = editTextFloorN.getText().toString();
                 apart = editTextApartn.getText().toString();
 
-                //cause
-            //    cause= editTextCause.getText().toString();
-                    get_q2_ans();
-                    get_q3_ans();
+                //check empty field
+                if (name.matches("")){
+                    Toast.makeText(ReservationActivity.this,"Please Enter the patient name",Toast.LENGTH_SHORT).show();
+                }
+                else if (phone.matches("")){
+                    Toast.makeText(ReservationActivity.this,"Please Enter the patient phone",Toast.LENGTH_SHORT).show();
+                }
+                else if (stN.matches("")){
+                    Toast.makeText(ReservationActivity.this,"Please Enter the street N°",Toast.LENGTH_SHORT).show();
+                }
+                else if (st.matches("")){
+                    Toast.makeText(ReservationActivity.this,"Please Enter the street Name",Toast.LENGTH_SHORT).show();
+                }
+               else if (floor.matches("")){
+                    Toast.makeText(ReservationActivity.this,"Please Enter the Floor N°",Toast.LENGTH_SHORT).show();
+                }
+               else if (apart.matches("")){
+                    Toast.makeText(ReservationActivity.this,"Please Enter the apartment N°",Toast.LENGTH_SHORT).show();
+                }
 
-                address = stN +", "+st+"\nApart N°: "+apart+"\nFloor N°: "+floor;
-                stringq1 ="1. if you are experiencing pain can you give it \na rating out of 10 where 1 is the least painful\nand 10 is the most painful?\n"
-                        +editTextQ1.getText().toString()+"\n";
-                stringq2 ="2. what increases the pain?\n"
-                        +radioQ2btn.getText().toString()+"\n";
-                stringq3 ="3. How do you deal with the pain?\n"
-                        +radioQ3btn.getText().toString()+"\n";
-                stringq4 ="4. How urgent do you think your emergency is from 1 to 10?\n"
-                        +editTextQ4.getText().toString()+"\n";
-                stringq5 ="5. Have you had any operations in the past?\n Can you kindly name it?\n"
-                        +editTextQ5.getText().toString()+"\n";
-                stringq6 ="6. Do you take any medications?\n Can you kindly write them done\n"
-                        +editTextQ6.getText().toString()+"\n";
+                //cause survey
+                    //check empty answer
+               else if (editTextQ1.getText().toString().matches("")){
+                    Toast.makeText(ReservationActivity.this,"Please answer Q1",Toast.LENGTH_SHORT).show();
+                }
+                else if (Q2Answer.length()==0){
+                    Toast.makeText(ReservationActivity.this,"Please answer Q2",Toast.LENGTH_SHORT).show();
+                }
+                else if (Q3Answer.length()==0){
+                    Toast.makeText(ReservationActivity.this,"Please answer Q3",Toast.LENGTH_SHORT).show();
+                }
+                else if (editTextQ4.getText().toString().matches("")){
+                    Toast.makeText(ReservationActivity.this,"Please answer Q4",Toast.LENGTH_SHORT).show();
+                }
+                else if (editTextQ5.getText().toString().matches("")){
+                    Toast.makeText(ReservationActivity.this,"Please answer Q5",Toast.LENGTH_SHORT).show();
+                }
+                else if (editTextQ6.getText().toString().matches("")){
+                    Toast.makeText(ReservationActivity.this,"Please answer Q6",Toast.LENGTH_SHORT).show();
+                }
+                 else {
+                    address = stN + ", " + st + "\nApart N°: " + apart + "\nFloor N°: " + floor;
+                    stringq1 = "1. if you are experiencing pain can you give it \na rating out of 10 where 1 is the least painful\nand 10 is the most painful?\n"
+                            + editTextQ1.getText().toString() + "\n";
+                    stringq2 = "2. what increases the pain?\n"
+                            + Q2Answer.toString() + "\n";
+                    stringq3 = "3. How do you deal with the pain?\n"
+                            + Q3Answer.toString() + "\n";
+                    stringq4 = "4. How urgent do you think your emergency is from 1 to 10?\n"
+                            + editTextQ4.getText().toString() + "\n";
+                    stringq5 = "5. Have you had any operations in the past?\n Can you kindly name it?\n"
+                            + editTextQ5.getText().toString() + "\n";
+                    stringq6 = "6. Do you take any medications?\n Can you kindly write them done\n"
+                            + editTextQ6.getText().toString() + "\n";
 
-                cause = stringq1+"\n"+stringq2+"\n"+stringq3+"\n"+stringq4+"\n"+stringq5+"\n"+stringq6+"\n";
-                //Toast.makeText(ReservationActivity.this,cause,Toast.LENGTH_SHORT).show();
+                    if (editTextQ7.getText().toString().matches("")){
+                        stringq7 = "7. Do you have any comments?\n No";
 
-                send_appointement_request(Date,Time,name,phone,address,cause);
+                    }else{
+                            stringq7 = "7. Do you have any comments?\n"
+                            + editTextQ7.getText().toString() + "\n";
+                       }
+
+
+                    cause = stringq1 + "\n" + stringq2 + "\n" + stringq3 + "\n" + stringq4 + "\n" + stringq5 + "\n" + stringq6 + "\n" + stringq7;
+
+                    //Toast.makeText(ReservationActivity.this, cause, Toast.LENGTH_SHORT).show();
+
+                    send_appointement_request(Date,Time,name,phone,address,cause);
+                }
             }
         });
 

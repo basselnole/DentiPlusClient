@@ -170,7 +170,9 @@
             android:ems="10"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:text="1. if you are experiencing pain can you give it \na rating out of 10 where 1 is the least painful\nand 10 is the most painful?"
+            android:text="1. if you are experiencing pain can you give it \na rating out of 10 where 1 is the least painful\nand 10 is the most painful?\n
+إذا كنت تعاني من الألم ، فهل يمكنك أن تعطيه نسبة من 10 حيث 1 هو الأقل إيلامًا و 10 هو الأكثر إيلامًا؟
+"
             android:paddingLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
@@ -193,67 +195,63 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:textColor="@color/black"
-            android:text="2. what increases the pain?"
+            android:text="2. what increases the pain?\n ما الذي يزيد الألم؟"
             android:textStyle="bold"
             android:paddingLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/radioGroupq2">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioquest2hot"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkquest2hot"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-           android:text="Hot foods and liquids"
+            android:text="Hot foods and liquids       الأطعمة والسوائل الساخنة"
             android:paddingLeft="5dp"
             android:textColor="@color/common_google_signin_btn_text_light_default"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioquest2cold"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkquest2cold"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Cold foods and liquids"
+            android:text="Cold foods and liquids    الأطعمةوالسوائل الباردة "
             android:paddingLeft="5dp"
             android:textColor="@color/common_google_signin_btn_text_light_default"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioquest2eat"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkquest2eat"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Eating"
+            android:text="Eating    تناول الطعام"
             android:paddingLeft="5dp"
             android:textColor="@color/common_google_signin_btn_text_light_default"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioquest2spon"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkquest2spon"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Spontaneous"
+            android:text="Spontaneous   من تلقاء نفسها"
             android:paddingLeft="5dp"
             android:textColor="@color/common_google_signin_btn_text_light_default"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioquest2wake"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkquest2wake"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Wakes me up from sleep"
+            android:text="Wakes me up from sleep   يوقظني من النوم"
             android:paddingLeft="5dp"
             android:textColor="@color/common_google_signin_btn_text_light_default"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
-        </RadioGroup>
+
 
         <TextView
             android:id="@+id/textquest3"
@@ -262,56 +260,51 @@
             android:ems="10"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:text="3. How do you deal with the pain?"
+            android:text="3. How do you deal with the pain?\n كيف تتعامل مع الألم؟"
             android:paddingLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="6dp"/>
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/radioGroupq3">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioquest3anal"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkquest3anal"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Analgesics"
+            android:text="Analgesics   المسكنات"
             android:textColor="@color/common_google_signin_btn_text_light_default"
             android:paddingLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioquest3top"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkquest3top"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textColor="@color/common_google_signin_btn_text_light_default"
-            android:text="Topical gels or creams"
+            android:text="Topical gels or creams   جل أو كريمات موضعية"
             android:paddingLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioquest3natu"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkquest3natu"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Natural alternatives"
+            android:text="Natural alternatives  بدائل طبيعية"
             android:paddingLeft="5dp"
             android:textColor="@color/common_google_signin_btn_text_light_default"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioquest3disap"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkquest3disap"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="It disappears on it own after a few seconds"
+            android:layout_height="50dp"
+            android:text="It disappears on it own after a few seconds\nيختفي من تلقاء نفسه بعد بضع ثوان"
             android:textColor="@color/common_google_signin_btn_text_light_default"
             android:paddingLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"/>
-        </RadioGroup>
 
         <TextView
             android:id="@+id/textquest4"
@@ -319,7 +312,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:textColor="@color/black"
-            android:text="4. How urgent do you think your emergency is from 1 to 10?"
+            android:text="4. How urgent do you think your emergency is from 1 to 10?\nإلى أي مدى تعتقد أن الحالة الخاصة بك عاجلة من 1 إلى 10؟"
             android:paddingLeft="10dp"
             android:textStyle="bold"
             android:layout_marginTop="15dp"
@@ -344,7 +337,7 @@
             android:ems="10"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:text="5. Have you had any operations in the past?\n Can you kindly name it?"
+            android:text="5. Have you had any operations in the past?\n Can you kindly name it?\n هل أجريت أي عمليات جراحية في الماضي؟ هل يمكنك ذكرها؟"
             android:paddingLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="6dp"/>
@@ -367,7 +360,7 @@
             android:ems="10"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:text="6. Do you take any medications?\n Can you kindly write them done"
+            android:text="6. Do you take any medications?\n Can you kindly write them done\nهل تتناول أي أدوية؟  هل يمكنك كتابتها؟"
             android:paddingLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="6dp"/>
@@ -378,6 +371,30 @@
             android:layout_height="50dp"
             android:background="@drawable/edittext"
             android:ems="10"
+            android:inputType="textMultiLine"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="6dp"/>
+
+        <TextView
+            android:id="@+id/textquest7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="7.Do you have any comments (Optional)"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="6dp"/>
+
+        <EditText
+            android:id="@+id/editTextquest7optional"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edittext"
+            android:ems="10"
+            android:hint="Do you have any comments"
             android:inputType="textMultiLine"
             android:paddingLeft="10dp"
             android:layout_marginTop="10dp"
