@@ -121,12 +121,6 @@ public class ReservationActivity extends AppCompatActivity {
                 refmonth = parts_date_ref[1]; // month
                 refyear = parts_date_ref[2]; // year
 
-             /*   String[] parts_time_ref = reftime.split(":");
-                refhour = parts_time_ref[0]; // hour
-                refminute = parts_time_ref[1]; // minutes*/
-                //textViewdatecount.setText(Integer.parseInt(hour)+" "+Integer.parseInt(minute));
-               // textViewcalendar.setText(Integer.parseInt(refday)+" "+Integer.parseInt(refmonth)+" "+Integer.parseInt(refyear)+" "+Integer.parseInt(refhour)+" "+Integer.parseInt(refminute));
-
                 calendar = Calendar.getInstance();
                 int current_hour = calendar.get(Calendar.HOUR_OF_DAY);
                 int current_min = calendar.get(Calendar.MINUTE);
@@ -158,9 +152,7 @@ public class ReservationActivity extends AppCompatActivity {
     }
 
      private void get_q2_ans(){
-         //int selectedId=radioGroupQ2.getCheckedRadioButtonId();
-         //radioQ2btn=(RadioButton)findViewById(selectedId);
-        // Toast.makeText(ReservationActivity.this,radioQ2btn.getText(),Toast.LENGTH_SHORT).show();
+
          Q2Answer.setLength(0); //clear it
 
          if (checkButtonq2A.isChecked()){
@@ -245,26 +237,6 @@ public class ReservationActivity extends AppCompatActivity {
 
         get_date_from_DB();
 
-/*       calendar = Calendar.getInstance();
-        int current_hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int current_min = calendar.get(Calendar.MINUTE);
-        int current_year = calendar.get(Calendar.YEAR);
-        int current_month = calendar.get(Calendar.MONTH);
-        int current_day = calendar.get(Calendar.DAY_OF_MONTH);
-
-       calendar.set(Calendar.YEAR,current_year);
-        calendar.set(Calendar.MONTH,current_month);
-        calendar.set(Calendar.DAY_OF_MONTH,current_day);
-
-        calendar.set(Calendar.HOUR,current_hour);
-        calendar.set(Calendar.MINUTE,current_min);
-
-        // min date to calendar is today and now
-        calendarView.setMinDate(calendar.getTimeInMillis());
-        timePicker.setIs24HourView(true);
-        timePicker.setHour(current_hour);
-        timePicker.setMinute(current_min);
-*/
         // Add Listener in calendar
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

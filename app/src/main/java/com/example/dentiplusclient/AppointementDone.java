@@ -164,36 +164,5 @@ public class AppointementDone extends AppCompatActivity {
                 .setNegativeButton("No", null)
                 .show();
     }
-/*
-    //your async task.
-    public class TalkToServer extends AsyncTask<Void, String, String> {
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            delete_request(key);
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // show progress dialog
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            // dismiss dialog
-           // intent_done_2 = new Intent(AppointementDone.this, whatnext.class);
-           // startActivity(intent_done_2);
-           // finish();
-           /* Intent i = new Intent(context, whatnext.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            context.startActivity(i);
-        }
-    }*/
 
 }

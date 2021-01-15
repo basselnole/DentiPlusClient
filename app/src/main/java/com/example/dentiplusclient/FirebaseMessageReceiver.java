@@ -29,10 +29,6 @@ public class FirebaseMessageReceiver
         // attributes. Since here we do not have any data
         // payload, This section is commented out. It is
         // here only for reference purposes.
-        /*if(remoteMessage.getData().size()>0){
-            showNotification(remoteMessage.getData().get("title"),
-                          remoteMessage.getData().get("message"));
-        }*/
 
         // Second case when notification payload is
         // received.
