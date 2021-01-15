@@ -22,8 +22,7 @@
         android:id="@+id/textViewdeclined"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thank you for interesting in our service.\nWe regret to inform you that we cannot be of service to you because we are already booked for the whole day
-our customer representative will call you as soon as possible"
+        android:text="Thank you for being interested in our services.\nUnfortunately we are totally booked at the present time, our customer representative will contact you as soon as possible to reschedule an appointment."
 
 
         android:paddingLeft="13dp"
