@@ -175,6 +175,7 @@ public class Login extends AppCompatActivity {
                                 if (!task.isSuccessful()) {
                                     // there was an error
                                     Toast.makeText(Login.this, "Email or Password in incorrect", Toast.LENGTH_LONG).show();
+                                    progressDialog.dismiss();
                                 } else{
                                     //save user info on the phone
                                     getSharedPreferences(PREFS_NAME,MODE_PRIVATE)
