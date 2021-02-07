@@ -1,4 +1,4 @@
-package com.example.dentiplusclient;
+package denti.example.dentiplusclient;
 
 public class ListOfReservationsClass {
 

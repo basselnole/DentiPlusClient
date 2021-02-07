@@ -11,23 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".whatnext"></activity>
-        <activity android:name=".AppointementDone" />
-        <activity android:name=".AppointementDeclined" />
-        <activity android:name=".MyAppointactivity" />
+        <activity android:name="denti.example.dentiplusclient.whatnext"></activity>
+        <activity android:name="denti.example.dentiplusclient.AppointementDone" />
+        <activity android:name="denti.example.dentiplusclient.AppointementDeclined" />
+        <activity android:name="denti.example.dentiplusclient.MyAppointactivity" />
         <activity
-            android:name=".WaitResponse"
+            android:name="denti.example.dentiplusclient.WaitResponse"
             />
         <activity
-            android:name=".ReservationActivity"
+            android:name="denti.example.dentiplusclient.ReservationActivity"
             />
         <activity
-            android:name=".Register"
+            android:name="denti.example.dentiplusclient.Register"
              />
         <activity
-            android:name=".Login"
+            android:name="denti.example.dentiplusclient.Login"
              />
-        <activity android:name=".MainActivity">
+        <activity android:name="denti.example.dentiplusclient.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +35,7 @@
             </intent-filter>
         </activity> <!-- [START firebase_service] -->
         <service
-            android:name=".FirebaseMessageReceiver"
+            android:name="denti.example.dentiplusclient.FirebaseMessageReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

@@ -1,10 +1,8 @@
-package com.example.dentiplusclient;
+package denti.example.dentiplusclient;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,13 +13,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.dentiplusclient.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -111,8 +108,6 @@ public class ReservationActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 //for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) { // key 1 (unique id)
-
-
                 refdate = dataSnapshot.child("date").getValue().toString();
                // reftime = dataSnapshot.child("time").getValue().toString();
 
@@ -269,7 +264,7 @@ public class ReservationActivity extends AppCompatActivity {
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker timePicker, int hour, int minute) {
-                textViewcalendar.setText("Appointment On: "+ Date+" At "+String.format("%02d:%02d",hour,minute));
+                textViewcalendar.setText("Appointment On: "+ Date+" at "+String.format("%02d:%02d",hour,minute));
                 Time = String.format("%02d:%02d",hour,minute);
                 nextbtn.setVisibility(View.VISIBLE);
             }

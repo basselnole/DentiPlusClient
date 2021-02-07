@@ -1,4 +1,4 @@
-package com.example.dentiplusclient;
+package denti.example.dentiplusclient;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,6 +10,7 @@ import android.widget.RemoteViews;
 
 import androidx.core.app.NotificationCompat;
 
+import com.example.dentiplusclient.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
