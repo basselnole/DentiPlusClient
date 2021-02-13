@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="denti.example.dentiplusclient.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -24,7 +20,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="40dp" />
 
     <VideoView
         android:id="@+id/videoView"
@@ -68,8 +64,40 @@
         android:background="@drawable/btn_border"
         android:layout_marginRight="7dp"
         android:layout_marginLeft="7dp"
-
         />
 
+    <TextView
+        android:id="@+id/textcont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="For more information please contact us:"
+        app:layout_constraintHorizontal_bias="0.05"
+        android:padding="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_register"
+        android:layout_marginTop="7dp"
+        android:textColor="#8fb522"
+        android:textStyle="bold"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        />
+    <TextView
+        android:id="@+id/textcontact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        app:layout_constraintHorizontal_bias="0.05"
+        android:padding="6dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textcont"
+        android:layout_marginTop="1dp"
+        android:textColor="#8fb522"
+        android:textStyle="bold"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

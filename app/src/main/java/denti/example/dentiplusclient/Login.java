@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dentiplusclient.R;
@@ -31,6 +32,8 @@ import com.google.firebase.database.ValueEventListener;
 public class Login extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword;
+    private TextView btnreset;
+
     private Button btnLogin;
     private FirebaseAuth auth;
     private ImageView backimg;
@@ -42,6 +45,7 @@ public class Login extends AppCompatActivity {
     public static final String PREFS_NAME = "MyPrefsFile";
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD = "password";
+
 
     // check reservation status if user already did a reservation
     private void check_reservation_status(String request_key_1){
@@ -126,6 +130,7 @@ public class Login extends AppCompatActivity {
         inputEmail=(EditText)findViewById(R.id.editTextEmail);
         inputPassword=(EditText)findViewById(R.id.editTextPassword);
         btnLogin = (Button) findViewById(R.id.btn_login);
+        btnreset = (TextView) findViewById(R.id.btn_reset);
         backimg = (ImageView) findViewById(R.id.imageViewbacklogin);
 
         // check if user has already logged in previously on this device
@@ -198,6 +203,15 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
+        });
+
+        btnreset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, reset.class);
+                startActivity(intent);
+                finish();
+                }
         });
     }
 

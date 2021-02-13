@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dentiplusclient">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logoscreen"
@@ -11,22 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="denti.example.dentiplusclient.whatnext"></activity>
+        <activity android:name="denti.example.dentiplusclient.reset">
+        </activity>
+        <activity android:name="denti.example.dentiplusclient.whatnext" />
         <activity android:name="denti.example.dentiplusclient.AppointementDone" />
         <activity android:name="denti.example.dentiplusclient.AppointementDeclined" />
         <activity android:name="denti.example.dentiplusclient.MyAppointactivity" />
-        <activity
-            android:name="denti.example.dentiplusclient.WaitResponse"
-            />
+        <activity android:name="denti.example.dentiplusclient.WaitResponse" />
         <activity
             android:name="denti.example.dentiplusclient.ReservationActivity"
-            />
-        <activity
-            android:name="denti.example.dentiplusclient.Register"
-             />
-        <activity
-            android:name="denti.example.dentiplusclient.Login"
-             />
+            android:screenOrientation="portrait" />
+        <activity android:name="denti.example.dentiplusclient.Register" />
+        <activity android:name="denti.example.dentiplusclient.Login" />
         <activity android:name="denti.example.dentiplusclient.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,5 +36,7 @@
             </intent-filter>
         </service>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

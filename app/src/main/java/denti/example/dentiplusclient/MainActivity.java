@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.example.dentiplusclient.R;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference();
 
     private Button loginbtn,signupbtn;
+    private TextView textViewcontact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,25 @@ public class MainActivity extends AppCompatActivity {
        videoView =(VideoView)findViewById(R.id.videoView);
        loginbtn =(Button)findViewById(R.id.button_login);
        signupbtn =(Button)findViewById(R.id.button_register);
+        textViewcontact =(TextView) findViewById(R.id.textcontact);
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Preparing...");
         progressDialog.show();
+
+        // display textview contact
+        myRef.child("contact").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+               final String x = dataSnapshot.getValue(String.class);
+               textViewcontact.setText(x);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         //display video
         myRef.child("Video").addValueEventListener(new ValueEventListener() {
@@ -61,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
 
 loginbtn.setOnClickListener(new View.OnClickListener() {
