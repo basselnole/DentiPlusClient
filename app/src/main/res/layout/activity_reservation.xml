@@ -359,7 +359,7 @@
             android:ems="10"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:text="6. Do you take any medications?\n Can you kindly write them done\nهل تتناول أي أدوية؟  هل يمكنك كتابتها؟"
+            android:text="6. Do you take any medications?\n Can you kindly write them down\nهل تتناول أي أدوية؟  هل يمكنك كتابتها؟"
             android:paddingLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="6dp"/>
