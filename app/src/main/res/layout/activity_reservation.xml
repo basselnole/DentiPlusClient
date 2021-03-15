@@ -41,7 +41,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:text="Set the Date"
-        android:textColor="@android:color/background_dark"
+        android:textColor="#006699"
 
         android:textStyle="bold" />
 

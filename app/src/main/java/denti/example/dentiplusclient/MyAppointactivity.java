@@ -27,12 +27,12 @@ public class MyAppointactivity extends AppCompatActivity {
     private String key;
 
     private String name,phone,address,cause,date,time;
-    private TextView textViewname,textViewphone,textViewaddress,textViewcause,textViewdate,textViewtime;
+    private TextView textViewname,textViewphone,textViewaddress,textViewcause,textViewdate,textViewtime,textViewnumber;
     private TextView textViewday,textViewhour,textViewmin,textViewsec;
     //firebase setup
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef = database.getReference("Requests");
-
+   // private DatabaseReference myRef = database.getReference("Requests");
+   private DatabaseReference myRef = database.getReference();
 
     private FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private String uid = currentFirebaseUser.getUid();
@@ -97,19 +97,20 @@ public class MyAppointactivity extends AppCompatActivity {
     }
 
     private void get_reservation_info(String req_key_1){
-        myRef.child(req_key_1).addListenerForSingleValueEvent(new ValueEventListener() {
+       // myRef.child(req_key_1).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final String x = dataSnapshot.child("contact").getValue(String.class);
+                textViewnumber.setText(x);
 
-                //for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) { // key 1 (unique id)
+                name = dataSnapshot.child("Requests").child(req_key_1).child("patient_name").getValue().toString();
+                phone = dataSnapshot.child("Requests").child(req_key_1).child("patient_phone").getValue().toString();
+                address = dataSnapshot.child("Requests").child(req_key_1).child("patient_address").getValue().toString();
 
-                name = dataSnapshot.child("patient_name").getValue().toString();
-                phone = dataSnapshot.child("patient_phone").getValue().toString();
-                address = dataSnapshot.child("patient_address").getValue().toString();
-
-                cause = dataSnapshot.child("reservation_Cause").getValue().toString();
-                date = dataSnapshot.child("reservation_Date").getValue().toString();
-                time = dataSnapshot.child("reservation_Time").getValue().toString();
+                cause = dataSnapshot.child("Requests").child(req_key_1).child("reservation_Cause").getValue().toString();
+                date = dataSnapshot.child("Requests").child(req_key_1).child("reservation_Date").getValue().toString();
+                time = dataSnapshot.child("Requests").child(req_key_1).child("reservation_Time").getValue().toString();
 
                 textViewname.setText(""+name);
                 textViewphone.setText(""+phone);
@@ -128,7 +129,7 @@ public class MyAppointactivity extends AppCompatActivity {
                 String[] parts_time = time.split(":");
                 hour = parts_time[0]; // hour
                 minute = parts_time[1]; // minutes
-                //textViewdatecount.setText(Integer.parseInt(hour)+" "+Integer.parseInt(minute));
+
                 counter(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day),Integer.parseInt(hour),Integer.parseInt(minute));
             }
 
@@ -145,7 +146,7 @@ public class MyAppointactivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_appointactivity);
 
 
-
+        textViewnumber = (TextView) findViewById(R.id.textViewcancel2);
         textViewname = (TextView) findViewById(R.id.textViewname);
         textViewphone = (TextView) findViewById(R.id.textViewphone);
         textViewaddress = (TextView) findViewById(R.id.textViewaddress);
@@ -158,6 +159,7 @@ public class MyAppointactivity extends AppCompatActivity {
         textViewhour = (TextView) findViewById(R.id.textViewhour);
         textViewmin = (TextView) findViewById(R.id.textViewminute);
         textViewsec = (TextView) findViewById(R.id.textViewsecond);
+
 
        // get the logged in user request key
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(uid).child("request");
